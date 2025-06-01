@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Image and heart icon -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/doctorImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/banner_2" />
+
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Doctor name -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_gravity="center"
+                android:paddingStart="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/doctorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. Jacob Lopez"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_color"
+                    android:layout_marginTop="8dp"/>
+
+                <!-- Specialty -->
+                <TextView
+                    android:id="@+id/specialty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dermatologist Specialist"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="14sp" />
+
+                <!-- Degrees -->
+                <TextView
+                    android:id="@+id/degrees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MBBS, DDV (Dermatology)"
+                    android:textColor="@color/golden"
+                    android:textSize="10sp" />
+
+                <!-- Rating -->
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rating"
+                    android:scaleX="0.5"
+                    android:numStars="5"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    android:isIndicator="true"
+                    android:rating="4.5"
+                    android:progressTint="@color/golden"
+                    android:secondaryProgressTint="@color/golden"
+                    android:backgroundTint="@color/ui_gray"
+                    />
+                <TextView
+                    android:id="@+id/review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(289 Reviews)"
+                    android:layout_marginStart="2dp"
+                    android:textColor="@color/text_color"
+                    android:textSize="10sp" />
+                <!-- Appointment Fee -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <TextView
+                        android:id="@+id/fee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Appointment Fee :"
+                        android:layout_weight="2"
+                        android:textColor="@color/text_color"
+                        android:textSize="12sp"
+                        android:layout_marginTop="4dp"/>
+                    <TextView
+                        android:id="@+id/rs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" ₹500"
+                        android:layout_weight="1"
+                        android:textColor="@color/ui_blue"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/shadow"
+        android:backgroundTint="#3B0166FF"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        android:background="@drawable/shadow"
+        android:backgroundTint="#1B0166FF"
+        />
+</LinearLayout>

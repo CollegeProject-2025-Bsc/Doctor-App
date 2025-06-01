@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="btn_blue">#0165f7</color>
+    <color name="ui_blue">#0166ff</color>
+    <color name="ui_green">#01FF41</color>
+    <color name="light_blue">#510166FF</color>
+    <color name="light_blue2">#A90166FF</color>
+    <color name="deep_blue">#09244b</color>
+    <color name="ui_red">#F80303</color>
+    <color name="ui_gray">#676767</color>
+    <color name="ui_bluishGray">#DF587492</color>
+    <color name="text_color">#FFFFFF</color>
+    <color name="bg_color">#141212</color>
+    <color name="doc_bg">#2D2D2D</color>
+    <color name="golden">#FFA000</color>
+
+    <color name="red">#ff6A61</color>
+    <color name="yellow">#ffcd01</color>
+    <color name="green">#33c75a</color>
+    <color name="orange">#ff9500</color>
+    <color name="pinkDeep">#c242f4</color>
+</resources>

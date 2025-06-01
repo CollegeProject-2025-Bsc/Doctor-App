@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:paddingTop="20dp"
+    android:orientation="vertical"
+    tools:context=".VIEW.SearchActivity">
+
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bg"
+        android:hint="Search Doctors...."
+        android:padding="10.dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/text_color"
+        android:drawableStart="@drawable/baseline_search_24"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Departments"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/text_color"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerDep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:itemCount="10" />
+</LinearLayout>

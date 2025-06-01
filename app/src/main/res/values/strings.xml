@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Health Sathi</string>
+
+    <string name="facebook_app_id">1323479042220670</string>
+    <string name="fb_login_protocol_scheme">fb1323479042220670</string>
+    <string name="facebook_client_token">52da9de7ebbe973405bf0a88d0f3c5e6</string>
+
+    <string-array name="Gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="app_motto">Let\'s Find The Best Doctor For You</string>
+    <string name="web_client_id">784919931346-7u2p375ieh66dstqgqd08ol225auj9b8.apps.googleusercontent.com</string>
+    <string name="app_motto2">Your health is the foundation of success! Prioritize your well-being with our service today!</string>
+    <string name="app_concern">Your health matters for us</string>
+    <string name="app_concern2">Your health\n matters for us</string>
+    <string name="login_msg">We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.</string>
+    <string name="signUp_msg">We will sent you a verification mail on your email address.</string>
+    <string name="passReset_msg">We will sent you a password reset mail on your email address.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
