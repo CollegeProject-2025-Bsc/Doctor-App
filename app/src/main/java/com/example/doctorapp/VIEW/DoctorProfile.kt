@@ -1,5 +1,7 @@
 package com.example.doctorapp.VIEW
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -39,6 +41,15 @@ class DoctorProfile : AppCompatActivity() {
         doctorProfileBinding.experience.text = "${doctor.experience} Years"
         doctorProfileBinding.reviewsCount.text = doctor.rating.toString()
 
+        doctorProfileBinding.location.setOnClickListener {
+            val uri = Uri.parse("geo:0,0?q=${Uri.encode(doctor.caddress)}")
+            val mapIntent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(mapIntent)
+        }
+
+        doctorProfileBinding.getAppointment.setOnClickListener {
+            startActivity(Intent(this,MakeAppointment::class.java).putExtra("doctor",doctor))
+        }
 
         TabLayoutMediator(doctorProfileBinding.tabLayout, doctorProfileBinding.viewPager){tab, position ->
                 tab.text = tabTitle[position]

@@ -27,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.internal.http2.Http2Reader
+import java.io.Serializable
 
 class Home : AppCompatActivity() {
     private lateinit var homeBinding: ActivityHomeBinding
@@ -60,7 +61,15 @@ class Home : AppCompatActivity() {
                             banners = bannerResult.body()
                             Log.d("@pop", "onCreate: $popularDoctor")
                             Log.d("@pop", "onCreate: ${popularDoctorResult.body()}")
-                            swapFrame(HomeFragment(department,popularDoctor,banners))
+                            swapFrame(
+                                HomeFragment().also {
+                                    it.arguments = Bundle().apply {
+                                        putSerializable("department", department as Serializable?)
+                                        putSerializable("popular", popularDoctor as Serializable?)
+                                        putSerializable("banner", banners as Serializable?)
+                                    }
+                                }
+                            )
                         }else{
                             swapFrame(LoadingError(LOSTCONN))
                             Snackbar.make(homeBinding.root,departmentResult.message(), Snackbar.LENGTH_LONG).show()
@@ -89,7 +98,15 @@ class Home : AppCompatActivity() {
 
         homeBinding.home.setOnClickListener {
             if (tabIndex != 0){
-                swapFrame(HomeFragment(department,popularDoctor,banners))
+                swapFrame(
+                    HomeFragment().also {
+                        it.arguments = Bundle().apply {
+                            putSerializable("department", department as Serializable?)
+                            putSerializable("popular", popularDoctor as Serializable?)
+                            putSerializable("banner", banners as Serializable?)
+                        }
+                    }
+                )
                 tabIndex = 0
             }
             val transition = ScaleAnimation(0f,1f,0f,1f,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f)
@@ -173,7 +190,15 @@ class Home : AppCompatActivity() {
             overridePendingTransition(R.anim.act_zoom_out,R.anim.act_zoom_in)
             tabIndex = 0
             if(department!!.isNotEmpty() && popularDoctor!!.isNotEmpty()){
-                swapFrame(HomeFragment(department,popularDoctor,banners))
+                swapFrame(
+                    HomeFragment().also {
+                        it.arguments = Bundle().apply {
+                            putSerializable("department", department as Serializable?)
+                            putSerializable("popular", popularDoctor as Serializable?)
+                            putSerializable("banner", banners as Serializable?)
+                        }
+                    }
+                )
             }
 
             val transition = ScaleAnimation(0f,1f,0f,1f,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f)

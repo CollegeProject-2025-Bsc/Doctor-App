@@ -19,7 +19,7 @@ import com.example.doctorapp.adapter.DocViewCardAdapter
 import com.example.doctorapp.databinding.FragmentHomeBinding
 
 
-class HomeFragment(val department: List<DepartmentModel>?, val popularDoctor: List<DoctorModel>?, val banner: List<BannerModel>? ) : Fragment() {
+class HomeFragment() : Fragment() {
     // TODO: Rename and change types of parameters
     lateinit var homeFragmentBinding: FragmentHomeBinding
     override fun onCreateView(
@@ -31,6 +31,10 @@ class HomeFragment(val department: List<DepartmentModel>?, val popularDoctor: Li
         homeFragmentBinding = FragmentHomeBinding.inflate(layoutInflater)
 
         homeFragmentBinding.userName.text = "Hi, ${USER!!.uName}!"
+
+        val department = arguments?.getSerializable("department") as List<DepartmentModel>?
+        val banner = arguments?.getSerializable("banner") as List<BannerModel>?
+        val popularDoctor = arguments?.getSerializable("popular") as List<DoctorModel>?
 
         Log.d("@data", department!![0].name)
         homeFragmentBinding.recyclerDep.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
@@ -52,7 +56,7 @@ class HomeFragment(val department: List<DepartmentModel>?, val popularDoctor: Li
 //                homeFragmentBinding.recyclerDep.isNestedScrollingEnabled = false
 //            }
 //        }
-        changeBannerPos()
+        changeBannerPos(banner)
 
         homeFragmentBinding.searchBar.setOnClickListener {
             startActivity(Intent(context,SearchActivity::class.java).putExtra("department", ArrayList<DepartmentModel>(department!!)))
@@ -61,12 +65,12 @@ class HomeFragment(val department: List<DepartmentModel>?, val popularDoctor: Li
         return homeFragmentBinding.root
     }
 
-    private fun changeBannerPos() {
+    private fun changeBannerPos(banner: List<BannerModel>) {
         Handler().postDelayed({
             val itemCount = banner!!.size
             val nextItem = (homeFragmentBinding.viewPager.currentItem + 1) % itemCount
             homeFragmentBinding.viewPager.setCurrentItem(nextItem, true)
-            changeBannerPos()
+            changeBannerPos(banner)
         },5000)
     }
 }

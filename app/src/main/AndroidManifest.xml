@@ -17,6 +17,9 @@
         android:theme="@style/Theme.DoctorApp"
         tools:targetApi="31">
         <activity
+            android:name=".VIEW.MakeAppointment"
+            android:exported="false" />
+        <activity
             android:name=".VIEW.DoctorProfile"
             android:exported="false" />
         <activity
