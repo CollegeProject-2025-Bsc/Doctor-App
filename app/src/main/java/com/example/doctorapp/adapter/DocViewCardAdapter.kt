@@ -51,7 +51,7 @@ class DocViewCardAdapter(val doctor: List<DoctorModel>): RecyclerView.Adapter<Do
         degrees.text = doctor[position].degree
         review.text = "(${doctor[position].rating} Reviews) "
         fee.text = "₹${doctor[position].fee}"
-        rating.rating = doctor[position].rating
+        rating.rating = doctor[position].rating.toFloat()
 
         holder.itemView.setOnClickListener {
             context.startActivity(Intent(context,DoctorProfile::class.java).putExtra("doctor",doctor[position]))
