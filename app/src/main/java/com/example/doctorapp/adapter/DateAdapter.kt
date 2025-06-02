@@ -15,7 +15,8 @@ import com.example.doctorapp.R
 import com.example.doctorapp.VIEW.DateInfo
 
 class DateAdapter(
-    val date:List<DateInfo>
+    val date:List<DateInfo>,
+    val onClick:(Int)-> Unit
 ):RecyclerView.Adapter<DateAdapter.DateViewHolder>() {
 
     var pos = -1
@@ -47,6 +48,7 @@ class DateAdapter(
             pos = position
             notifyDataSetChanged()
             Log.d("@dataAdapter", "onBindViewHolder: clicked $position")
+            onClick(position)
         }
 
         if (position == pos){

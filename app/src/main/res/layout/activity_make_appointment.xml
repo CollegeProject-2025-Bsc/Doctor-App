@@ -65,21 +65,191 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
+        android:id="@+id/slotView"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:padding="10dp"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:tint="@color/text_color"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/morning"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Morning"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/morning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/date_bg"
+                android:layout_marginStart="20dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/date_bg"
+                    android:padding="10dp">
+                    <TextView
+                        android:id="@+id/mTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09:00 AM"
+                        android:textSize="20dp"
+                        android:textColor="@color/text_color"/>
+                </LinearLayout>
 
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:tint="@color/text_color"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/afternoon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Afternoon"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/afternoon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/date_bg"
+                android:layout_marginStart="20dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/date_bg"
+                    android:padding="10dp">
+                    <TextView
+                        android:id="@+id/aTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="02:00 PM"
+                        android:textSize="20dp"
+                        android:textColor="@color/text_color"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:tint="@color/text_color"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/moon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Night"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_color"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/date_bg"
+                android:layout_marginStart="20dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/date_bg"
+                    android:padding="10dp"
+                    >
+                    <TextView
+                        android:id="@+id/nTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="06:00 PM"
+                        android:textSize="20dp"
+                        android:textColor="@color/text_color"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/msg"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Please select a slot"
+        android:textSize="20dp"
+        android:textColor="@color/ui_blue"
+        android:textStyle="bold"
+        android:gravity="center"/>
     <LinearLayout
         android:gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:paddingStart="10dp"
         android:background="@color/doc_bg"
         android:paddingEnd="10dp"
-        android:orientation="horizontal">
 
+        android:orientation="vertical">
+        <Spinner
+            android:id="@+id/snipper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
         <Button
             android:id="@+id/getAppointment"
             android:layout_width="match_parent"
