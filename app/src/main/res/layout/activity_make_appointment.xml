@@ -237,19 +237,38 @@
         android:paddingEnd="10dp"
 
         android:orientation="vertical">
-        <Spinner
-            android:id="@+id/snipper"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:paddingBottom="10dp"
+            android:gravity="center_horizontal|center_vertical|bottom"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Payments : "
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/text_color"
+                android:textSize="20dp"/>
+            <Spinner
+                android:id="@+id/snipper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </LinearLayout>
+
         <Button
             android:id="@+id/getAppointment"
             android:layout_width="match_parent"

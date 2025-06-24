@@ -8,6 +8,8 @@ import com.example.doctorapp.API.ApiInstance
 import com.example.doctorapp.Authentication.GoogleAuthLoginClass
 import com.example.doctorapp.Authentication.LoginAuth
 import com.example.doctorapp.Authentication.PhoneNumberVerification.Companion.phoneNumberVerification
+import com.example.doctorapp.MODEL.AppointmentRequestModel
+import com.example.doctorapp.MODEL.AppointmentResult
 import com.example.doctorapp.MODEL.BannerModel
 import com.example.doctorapp.MODEL.CreateUserResult
 import com.example.doctorapp.MODEL.DepartmentModel
@@ -47,6 +49,7 @@ class DocViewModel:ViewModel() {
     suspend fun updateUser(user: UserModel): Response<CreateUserResult>  = ApiInstance.API.updateUser(user = user)
 
     suspend fun getDepartmentDoctor(id:String): Response<List<DoctorModel>> = ApiInstance.API.getDepartmentDoctor(id)
+    suspend fun bookAppointment(appointmentRequestModel: AppointmentRequestModel): Response<AppointmentResult> = ApiInstance.API.bookAppointment(appointmentRequestModel)
 
 
 

@@ -13,15 +13,18 @@
     <color name="deep_blue">#09244b</color>
     <color name="ui_green">#01FF41</color>
     <color name="ui_red">#F80303</color>
+    <color name="red">#b12856</color>
+    <color name="red_light">#36B12856</color>
+    <color name="pink">#bb3965</color>
     <color name="ui_gray">#5D5858</color>
     <color name="ui_bluishGray">#DF587492</color>
     <color name="text_color">#FF000000</color>
     <color name="bg_color">#E9F2FF</color>
     <color name="doc_bg">#FFFFFF</color>
-    <color name="pink">#c242f4</color>
+    <color name="purple">#c242f4</color>
     <color name="golden">#FFA000</color>
 
-    <color name="red">#ff6A61</color>
+    <color name="red_fade">#ff6A61</color>
     <color name="yellow">#ffcd01</color>
     <color name="green">#33c75a</color>
     <color name="orange">#ff9500</color>

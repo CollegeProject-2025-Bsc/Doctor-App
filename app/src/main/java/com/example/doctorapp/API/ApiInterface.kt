@@ -1,5 +1,7 @@
 package com.example.doctorapp.API
 
+import com.example.doctorapp.MODEL.AppointmentRequestModel
+import com.example.doctorapp.MODEL.AppointmentResult
 import com.example.doctorapp.MODEL.BannerModel
 import com.example.doctorapp.MODEL.CreateUserResult
 import com.example.doctorapp.MODEL.DepartmentModel
@@ -41,6 +43,10 @@ interface ApiInterface {
     suspend fun updateUser(
         @Body user: UserModel
     ):Response<CreateUserResult>
+    @POST("/book_appointment")
+    suspend fun bookAppointment(
+        @Body appointmentRequestModel: AppointmentRequestModel
+    ):Response<AppointmentResult>
 
     @POST("/get_department_doctors")
     suspend fun getDepartmentDoctor(
