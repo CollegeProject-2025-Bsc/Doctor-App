@@ -9,6 +9,9 @@ import com.razorpay.Checkout
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -35,7 +38,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class MakeAppointment : AppCompatActivity(), AdapterView.OnItemSelectedListener,
+class MakeAppointment : AppCompatActivity(),
     PaymentResultListener {
     lateinit var makeAppointmentBinding: ActivityMakeAppointmentBinding
     lateinit var doctor: DoctorModel
@@ -112,19 +115,43 @@ class MakeAppointment : AppCompatActivity(), AdapterView.OnItemSelectedListener,
         }
 
         makeAppointmentBinding.getAppointment.setOnClickListener {
-            if(daySelection != -1 && slotSelection != -1 && paymentModeSelection != -1){
-                if(paymentModeSelection == 0){
-                    val wait = AlertDialog.Builder(this@MakeAppointment)
-                    wait.setView(LayoutInflater.from(this).inflate(R.layout.appointment_loading,null))
-                    wait.show()
-                    val wait2 = wait.create()
-                    Handler().postDelayed({
-                        wait2.dismiss()
-                        bookAppointment("not yet generated","offline","pending")
-                    },4000)
-                }else{
-                    initializeRazorpay(doctor.fee)
+
+
+            if(daySelection != -1 && slotSelection != -1){
+                val payment = AlertDialog.Builder(this@MakeAppointment)
+                val view = LayoutInflater.from(this@MakeAppointment).inflate(R.layout.payment_option,null)
+                payment.setView(view)
+                val radioGroup: RadioGroup = view.findViewById<RadioGroup>(R.id.group)
+                val continuePayment = view.findViewById<TextView>(R.id.continueP)
+                val cancel = view.findViewById<TextView>(R.id.cancel)
+                radioGroup.setOnCheckedChangeListener { group,id->
+                        if (id == R.id.online){
+                            paymentModeSelection = 0
+                        }else{
+                            paymentModeSelection = 1
+                        }
                 }
+                val paymentC = payment.create()
+                payment.show()
+                cancel.setOnClickListener{
+                    paymentC.dismiss()
+                }
+                continuePayment.setOnClickListener {
+                    paymentC.dismiss()
+                    if(paymentModeSelection == 0){
+                        val wait = AlertDialog.Builder(this@MakeAppointment)
+                        wait.setView(LayoutInflater.from(this).inflate(R.layout.appointment_loading,null))
+                        wait.show()
+                        val wait2 = wait.create()
+                        Handler().postDelayed({
+                            wait2.dismiss()
+                            bookAppointment("not yet generated","offline","pending")
+                        },4000)
+                    }else{
+                        initializeRazorpay(doctor.fee)
+                    }
+                }
+
 
             }else{
                 Toast.makeText(this@MakeAppointment,"Please select date and time",Toast.LENGTH_LONG).show()
@@ -139,8 +166,7 @@ class MakeAppointment : AppCompatActivity(), AdapterView.OnItemSelectedListener,
 
         // Set simple layout resource file for each item of spinner
         adpeter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        makeAppointmentBinding.snipper.adapter = adpeter
-        makeAppointmentBinding.snipper.onItemSelectedListener = this
+        
 
     }
     fun getNext30Days(): List<String> {
@@ -187,14 +213,6 @@ class MakeAppointment : AppCompatActivity(), AdapterView.OnItemSelectedListener,
         }
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        paymentModeSelection = position
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-        paymentModeSelection = -1
-    }
-
 
 
     private fun bookAppointment(paymentId: String?,paymentMode:String,paymentStatus:String) {
@@ -217,7 +235,8 @@ class MakeAppointment : AppCompatActivity(), AdapterView.OnItemSelectedListener,
             if (result.isSuccessful){
                val msg = result.body()!!
                 Log.d("@makeAppointment", "bookAppointment: ${msg.message}")
-                startActivity(Intent(this@MakeAppointment,PaymentSuccess::class.java)
+                startActivity(
+                    Intent(this@MakeAppointment,PaymentSuccess::class.java)
                     .putExtra("appointment",appointmentRequest)
                     .putExtra("doctor",doctor)
                 )

@@ -39,12 +39,13 @@ import kotlinx.coroutines.launch
 
 
 class LoginActivity : AppCompatActivity() {
-    val googleAuthClient by lazy{
-        GoogleAuthLoginClass(this,oneTapClient = Identity.getSignInClient(applicationContext))
+    private val googleAuthClient by lazy{
+        GoogleAuthLoginClass(this@LoginActivity,oneTapClient = Identity.getSignInClient(applicationContext))
     }
     private lateinit var loginBinding: ActivityLoginBinding
     private lateinit var callbackManager: CallbackManager
     private lateinit var auth: FirebaseAuth
+    private lateinit var activityResultLauncher: ActivityResultLauncher<IntentSenderRequest>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -66,11 +67,13 @@ class LoginActivity : AppCompatActivity() {
 
 
         //activity result alternative
-        val activityResultLauncher : ActivityResultLauncher<IntentSenderRequest> =
+        activityResultLauncher =
             registerForActivityResult(
                 ActivityResultContracts.StartIntentSenderForResult()
             ) { result ->
+                Log.d("gbtn@", "${result.resultCode}")
                 if (result.resultCode == RESULT_OK) {
+                    Log.d("gbtn@", "onCreate: inside activity result")
                     lifecycleScope.launch {
                         val signInResult = googleAuthClient.getSignInResultFromIntent(
                             intent = result.data ?: return@launch
@@ -151,6 +154,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Initialize Google Login button
         loginBinding.gBtn.setOnClickListener {
+            Log.d("gbtn@", "onCreate: clicked")
             lifecycleScope.launch {
                 val signInIntent = googleAuthClient.signIn()
                 activityResultLauncher.launch(
@@ -168,14 +172,17 @@ class LoginActivity : AppCompatActivity() {
         loginBinding.fBtn.setOnClickListener {
             callbackManager = CallbackManager.Factory.create()
             LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
+            Log.d("@TAG", "facebook:onSuccess: here inside facebook")
             LoginManager.getInstance().registerCallback(
                 callbackManager,
                 object : FacebookCallback<LoginResult> {
                     override fun onSuccess(loginResult: LoginResult) {
+                        Log.d("@TAG", "facebook:onSuccess: here inside facebook onsuccess")
                         Log.d("@facLogin", "facebook:onSuccess:$loginResult")
                         handleFacebookAccessToken(loginResult.accessToken)
                     }
                     override fun onCancel() {
+                        Log.d("@fbLogin", "onCancel: facebook cancel")
                         Log.d("@facLogin", "facebook:onCancel")
                     }
                     override fun onError(error: FacebookException) {
@@ -272,6 +279,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
+
     fun checkEmailPassword(email:String, password:String, reConfirmPassword:String):Boolean{
 
         val emailRegex = Regex("^[a-z0-9A-Z._%+-]+\\@[a-z0-9A-Z]+\\.[a-zA-Z]{3,6}$")

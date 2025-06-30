@@ -3,6 +3,7 @@ package com.example.doctorapp.Authentication
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.util.Log
 import android.widget.Toast
 import com.example.doctorapp.MODEL.GLoginError
 import com.example.doctorapp.R
@@ -24,13 +25,14 @@ class GoogleAuthLoginClass(
 
 
     suspend fun signIn(): IntentSender?{
-
+        Log.d("@TAG", "signIn: inside g signin interface")
         val result = try{
             oneTapClient.beginSignIn(
                 buildSignInRequest()
             ).await()
         }catch (e: Exception){
             if (e is CancellationException) throw e
+            Log.d("@TAG", e.message.toString())
             null
         }
         return result?.pendingIntent?.intentSender
@@ -58,6 +60,7 @@ class GoogleAuthLoginClass(
             GLoginError(null)
         } catch (e: Exception) {
             if (e is CancellationException) throw e
+            Log.d("@TAG", "signIn: inside g signin interface")
             GLoginError(e.message.toString())
         }
     }

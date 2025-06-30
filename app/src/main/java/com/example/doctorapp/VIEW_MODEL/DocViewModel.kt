@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.example.doctorapp.API.ApiInstance
 import com.example.doctorapp.Authentication.GoogleAuthLoginClass
 import com.example.doctorapp.Authentication.LoginAuth
-import com.example.doctorapp.Authentication.PhoneNumberVerification.Companion.phoneNumberVerification
 import com.example.doctorapp.MODEL.AppointmentRequestModel
 import com.example.doctorapp.MODEL.AppointmentResult
 import com.example.doctorapp.MODEL.BannerModel
@@ -23,22 +22,6 @@ import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Response
 
 class DocViewModel:ViewModel() {
-    suspend fun getCode(phoneNumber: String?) = phoneNumberVerification.getCode(phoneNumber)
-
-
-//    suspend fun signUpWithEmail(
-//        email: String?,
-//        password: String?,
-//        user: String?,
-//        auth: FirebaseAuth,
-//        context: Context,
-//        lifecycleScope: LifecycleCoroutineScope
-//    ):loginResult {
-//        val result = LoginAuth.loginAuth.signUpWithEmail(email, password,auth,user,context,lifecycleScope)
-//        Log.d("@loginResult", result.verificationMailSent.toString())
-//        return result
-//    }
-
 
     suspend fun getCategory(): Response<List<DepartmentModel>> = ApiInstance.API.getDepartment()
     suspend fun getPopularDoctors(): Response<List<DoctorModel>> = ApiInstance.API.getPopularDoctors()
@@ -50,9 +33,6 @@ class DocViewModel:ViewModel() {
 
     suspend fun getDepartmentDoctor(id:String): Response<List<DoctorModel>> = ApiInstance.API.getDepartmentDoctor(id)
     suspend fun bookAppointment(appointmentRequestModel: AppointmentRequestModel): Response<AppointmentResult> = ApiInstance.API.bookAppointment(appointmentRequestModel)
-
-
-
 
 
 }

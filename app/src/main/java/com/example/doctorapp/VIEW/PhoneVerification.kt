@@ -21,7 +21,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
-import com.example.doctorapp.Authentication.PhoneNumberVerification.Companion.phoneNumberVerification
 import com.example.doctorapp.MODEL.PhoneModel
 import com.example.doctorapp.R
 import com.example.doctorapp.UTIL.Static.Companion.USER

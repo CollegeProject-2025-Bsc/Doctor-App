@@ -9,7 +9,7 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.doctorapp" />
-                  <option name="mobileSdkAppId" value="1:784919931346:android:5f0ce7ad07f7acaffa400b" />
+                  <option name="mobileSdkAppId" value="1:784919931346:android:9f3171974e6e64ccfa400b" />
                   <option name="projectId" value="doctor-appoinment-project" />
                   <option name="projectNumber" value="784919931346" />
                 </ConnectionSetting>

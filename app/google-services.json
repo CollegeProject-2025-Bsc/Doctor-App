@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "784919931346",
+    "firebase_url": "https://doctor-appoinment-project-default-rtdb.firebaseio.com",
     "project_id": "doctor-appoinment-project",
     "storage_bucket": "doctor-appoinment-project.firebasestorage.app"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "784919931346-582o4f0lonsggkb2740d9d6686q887rf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.doctor_app_database_admin_panel",
+            "certificate_hash": "b91eb3b6061ffebd12c84f9dfff554eb8a80bf4f"
+          }
+        },
         {
           "client_id": "784919931346-7u2p375ieh66dstqgqd08ol225auj9b8.apps.googleusercontent.com",
           "client_type": 3
@@ -36,18 +45,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:784919931346:android:5f0ce7ad07f7acaffa400b",
+        "mobilesdk_app_id": "1:784919931346:android:9f3171974e6e64ccfa400b",
         "android_client_info": {
           "package_name": "com.example.doctorapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "784919931346-4oqfposc9at5lknn6e8oas7ovp06kji0.apps.googleusercontent.com",
+          "client_id": "784919931346-3fco6fvdv3cfgpnsjmcr83iodu2d48j8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.doctorapp",
-            "certificate_hash": "942ebe34d3876cccf0127e087e4fdf2a98f68e95"
+            "certificate_hash": "b91eb3b6061ffebd12c84f9dfff554eb8a80bf4f"
           }
         },
         {
