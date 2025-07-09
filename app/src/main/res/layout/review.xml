@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/bottom_review_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:orientation="vertical"
+        android:background="@color/bg_color"
+        android:elevation="6dp">
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:stepSize="1.0"
+            android:isIndicator="false"
+            android:progressTint="@color/golden"
+            android:secondaryProgressTint="@color/golden"
+            android:backgroundTint="@color/ui_gray"
+            />
+
+        <EditText
+            android:id="@+id/reviewEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Write your review..."
+            android:minHeight="80dp"
+            android:textColor="@color/black"
+            android:gravity="top"
+            android:background="@android:drawable/edit_text"
+            android:inputType="textMultiLine"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/submitReviewBtn"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/ui_blue"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
+    </LinearLayout>
+</LinearLayout>

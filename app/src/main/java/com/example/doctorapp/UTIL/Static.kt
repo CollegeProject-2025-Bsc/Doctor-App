@@ -18,6 +18,7 @@ class Static {
         const val BACKEND_URL = "https://safely-massive-seahorse.ngrok-free.app"
         const val PAYMENT_SUCCESSFUL = "https://lottie.host/7ce5170f-c3e9-45dc-b996-a6794dec9f16/1veoroJ1H7.json"
         const val PAYMENT = "https://lottie.host/6bcb2bcb-0a10-43cf-a34e-712fbf78efd7/TtUUSJgA03.json"
+        const val JOY_LOTTIE = "https://lottie.host/e4af863a-bda8-40e5-8fc4-abfcbdc2aee3/PlA1h8RYrM.json"
         const val TAB_ANI_DURATION = 200L
         const val SUPABASEURL = "https://syeurwjumplsyeeejrac.supabase.co"
         const val SUPABASEKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5ZXVyd2p1bXBsc3llZWVqcmFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2Njg0MTUsImV4cCI6MjA1ODI0NDQxNX0.dFSb8DFLxcX4ruWJs7CBOaEhhqzbrvt2fSHEATMiELc"

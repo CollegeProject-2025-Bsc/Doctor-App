@@ -11,5 +11,9 @@ data class AppointmentRequestModel(
     val payment_mode: String,
     val payment_status: String,
     val payment_id: String,
-    val fee :Int
+    val fee :Int,
+    val time:String,
+    val dname:String,
+    val specialization: String,
+    val pic:String
 ): Serializable

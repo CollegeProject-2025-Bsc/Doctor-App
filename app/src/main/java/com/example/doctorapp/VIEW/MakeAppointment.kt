@@ -7,9 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import com.razorpay.Checkout
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -20,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.doctorapp.MODEL.AppointmentModel
 import com.example.doctorapp.MODEL.AppointmentRequestModel
 import com.example.doctorapp.MODEL.DoctorModel
 import com.example.doctorapp.R
@@ -31,7 +30,6 @@ import com.example.doctorapp.databinding.ActivityMakeAppointmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.razorpay.PaymentResultListener
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.time.LocalDate
@@ -47,6 +45,8 @@ class MakeAppointment : AppCompatActivity(),
     var slotSelection: Int = -1
     var daySelection = -1
     var paymentModeSelection = -1
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,41 +84,49 @@ class MakeAppointment : AppCompatActivity(),
         }
 
         makeAppointmentBinding.morning.setOnClickListener {
-            slotSelection = 0
-            makeAppointmentBinding.morning.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,R.color.ui_blue)
-            makeAppointmentBinding.mTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.white))
+            if (doctor.schedule[dates[daySelection].dayOfWeek.lowercase()]?.get(0)?.duration!!.toInt() > 0){
+                slotSelection = 0
+                makeAppointmentBinding.morning.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,R.color.ui_blue)
+                makeAppointmentBinding.mTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.white))
 
-            makeAppointmentBinding.aTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
-            makeAppointmentBinding.nTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
-            makeAppointmentBinding.afternoon.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
-            makeAppointmentBinding.night.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
+                makeAppointmentBinding.aTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
+                makeAppointmentBinding.nTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
+                makeAppointmentBinding.afternoon.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
+                makeAppointmentBinding.night.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
+            }
+
         }
         makeAppointmentBinding.afternoon.setOnClickListener {
-            slotSelection = 1
-            makeAppointmentBinding.afternoon.backgroundTintList = ContextCompat.getColorStateList(applicationContext,R.color.ui_blue)
-            makeAppointmentBinding.aTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.white))
+            if (doctor.schedule[dates[daySelection].dayOfWeek.lowercase()]?.get(1)?.duration!!.toInt() > 0){
+                slotSelection = 1
+                makeAppointmentBinding.afternoon.backgroundTintList = ContextCompat.getColorStateList(applicationContext,R.color.ui_blue)
+                makeAppointmentBinding.aTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.white))
 
-            makeAppointmentBinding.mTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
-            makeAppointmentBinding.nTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
-            makeAppointmentBinding.morning.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
-            makeAppointmentBinding.night.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
+                makeAppointmentBinding.mTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
+                makeAppointmentBinding.nTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
+                makeAppointmentBinding.morning.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
+                makeAppointmentBinding.night.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
+            }
+
         }
         makeAppointmentBinding.night.setOnClickListener {
-            slotSelection = 2
-            makeAppointmentBinding.night.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,R.color.ui_blue)
-            makeAppointmentBinding.nTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.white))
+            if (doctor.schedule[dates[daySelection].dayOfWeek.lowercase()]?.get(2)?.duration!!.toInt() > 0){
+                slotSelection = 2
+                makeAppointmentBinding.night.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,R.color.ui_blue)
+                makeAppointmentBinding.nTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.white))
 
-            makeAppointmentBinding.aTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
-            makeAppointmentBinding.mTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
-            makeAppointmentBinding.morning.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
-            makeAppointmentBinding.afternoon.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
+                makeAppointmentBinding.aTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
+                makeAppointmentBinding.mTime.setTextColor(ContextCompat.getColor(this@MakeAppointment,R.color.text_color))
+                makeAppointmentBinding.morning.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
+                makeAppointmentBinding.afternoon.backgroundTintList = ContextCompat.getColorStateList(this@MakeAppointment,android.R.color.transparent)
+            }
         }
 
         makeAppointmentBinding.getAppointment.setOnClickListener {
 
 
             if(daySelection != -1 && slotSelection != -1){
-                val payment = AlertDialog.Builder(this@MakeAppointment)
+                val payment = MaterialAlertDialogBuilder(this@MakeAppointment)
                 val view = LayoutInflater.from(this@MakeAppointment).inflate(R.layout.payment_option,null)
                 payment.setView(view)
                 val radioGroup: RadioGroup = view.findViewById<RadioGroup>(R.id.group)
@@ -126,13 +134,13 @@ class MakeAppointment : AppCompatActivity(),
                 val cancel = view.findViewById<TextView>(R.id.cancel)
                 radioGroup.setOnCheckedChangeListener { group,id->
                         if (id == R.id.online){
-                            paymentModeSelection = 0
-                        }else{
                             paymentModeSelection = 1
+                        }else{
+                            paymentModeSelection = 0
                         }
                 }
                 val paymentC = payment.create()
-                payment.show()
+                paymentC.show()
                 cancel.setOnClickListener{
                     paymentC.dismiss()
                 }
@@ -213,7 +221,15 @@ class MakeAppointment : AppCompatActivity(),
         }
     }
 
-
+    private fun getSlot(dayOfWeek: String): Int{
+        return if (dayOfWeek.lowercase() == "morning"){
+            0
+        }else if (dayOfWeek.lowercase() == "afternoon"){
+            1
+        }else{
+            2
+        }
+    }
 
     private fun bookAppointment(paymentId: String?,paymentMode:String,paymentStatus:String) {
 
@@ -227,7 +243,11 @@ class MakeAppointment : AppCompatActivity(),
             payment_id = paymentId!!,
             payment_mode = paymentMode,
             payment_status = paymentStatus,
-            fee = doctor.fee
+            fee = doctor.fee,
+            time = doctor.schedule[dates[daySelection].dayOfWeek.lowercase()]?.get(getSlot(doctor.schedule[dates[daySelection].dayOfWeek.lowercase()]?.get(slotSelection)?.time.toString()))?.hour.toString().uppercase(),
+            dname = doctor.dname,
+            specialization = doctor.specialization,
+            pic = doctor.profile_pic
         )
 
         lifecycleScope.launch {

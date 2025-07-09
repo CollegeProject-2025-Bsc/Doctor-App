@@ -5,56 +5,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.doctorapp.R
+import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.doctorapp.MODEL.DoctorModel
+import com.example.doctorapp.UTIL.Static.Companion.LOADING
+import com.example.doctorapp.UTIL.Static.Companion.USER
+import com.example.doctorapp.VIEW_MODEL.DocViewModel
+import com.example.doctorapp.adapter.DocViewCardAdapter
+import com.example.doctorapp.databinding.FragmentFavDocBinding
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FavDocFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FavDocFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    lateinit var favDocBinding: FragmentFavDocBinding
+    lateinit var adapter: DocViewCardAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fav_doc, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FavDocFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FavDocFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        favDocBinding = FragmentFavDocBinding.inflate(layoutInflater)
+        // Inflate the layout for this fragment
+
+        var favDoc: ArrayList<DoctorModel> = arrayListOf()
+
+        favDocBinding.ivLottie.setAnimationFromUrl(LOADING)
+        val viewmodel = arguments?.getSerializable("viewmodel") as DocViewModel
+        favDocBinding.favRecycler.layoutManager = LinearLayoutManager(requireContext())
+
+        lifecycleScope.launch {
+            if(isAdded){
+                val favDocResult = viewmodel.getFavDoctor(USER!!.uid)
+                if (favDocResult.isSuccessful){
+                    favDocBinding.main.visibility = View.VISIBLE
+                    favDocBinding.load.visibility = View.GONE
+                    favDoc = favDocResult.body()!! as ArrayList<DoctorModel>
+                    adapter = DocViewCardAdapter(favDoc){
+                        callApi(lifecycleScope, favDoc[it],viewmodel,favDoc,it)
+                    }
+                    favDocBinding.favRecycler.adapter = adapter
                 }
             }
+        }
+
+
+
+
+        return favDocBinding.root
+    }
+
+    private fun callApi(
+        lifecycleScope: LifecycleCoroutineScope,
+        model: DoctorModel,
+        viewmodel: DocViewModel,
+        favDoc: ArrayList<DoctorModel>,
+        i: Int
+    ) {
+        lifecycleScope.launch {
+            viewmodel.deleteFavDoc(USER!!.uid,model.did)
+            favDoc.removeAt(i)
+            adapter.update(favDoc)
+        }
     }
 }

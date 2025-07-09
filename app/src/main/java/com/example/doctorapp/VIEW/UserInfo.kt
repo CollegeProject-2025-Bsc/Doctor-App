@@ -25,6 +25,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.doctorapp.R
@@ -153,6 +154,11 @@ class UserInfo : AppCompatActivity() {
                 datePicker.setTitle("Select your Date of Birth")
                 datePicker.show()
             }
+            val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                Manifest.permission.READ_MEDIA_IMAGES
+            } else {
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            }
             userInfoBinding.uGender.setOnClickListener {
                 val menu = PopupMenu(this@UserInfo,it )
                 menu.menu.add("Male") // menus items
@@ -167,10 +173,29 @@ class UserInfo : AppCompatActivity() {
             }
 
             userInfoBinding.picBtn.setOnClickListener {
-                val intent = Intent()
-                intent.type = "image/*"
-                intent.action = Intent.ACTION_GET_CONTENT
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 100)
+                if(ContextCompat.checkSelfPermission(this,permission) != PackageManager.PERMISSION_GRANTED){
+                    val alert = MaterialAlertDialogBuilder(this).also {
+                        it.setTitle("Permission Required")
+                        it.setMessage("We need stroage permission to access your photos.\nGo to setting then permission and grant photos permission")
+                        it.setPositiveButton("setting"){
+                                dialog, which ->
+                            openAppSettings(this@UserInfo)
+                            dialog.dismiss()
+                        }
+                        it.setNegativeButton("no"){
+                                dialog, which ->
+                            dialog.dismiss()
+                        }
+                    }
+                    alert.show()
+                }else{
+                    val intent = Intent()
+                    intent.type = "image/*"
+                    intent.action = Intent.ACTION_GET_CONTENT
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), 100)
+                }
+
+
             }
             userInfoBinding.fetch.setOnClickListener {
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -295,6 +320,7 @@ class UserInfo : AppCompatActivity() {
             val result = viewModel.updateUser(user = USER!!)
             if (result.isSuccessful){
                 startActivity(Intent(this@UserInfo,Home::class.java))
+                finish()
             }else{
                 Snackbar.make(userInfoBinding.main,result.message(),Snackbar.LENGTH_SHORT).show()
             }
@@ -312,7 +338,7 @@ fun openAppSettings(context: Context) {
 }
 
 
-private fun UserInfo.checkGPS(): Boolean {
+fun UserInfo.checkGPS(): Boolean {
     val locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
     return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 }

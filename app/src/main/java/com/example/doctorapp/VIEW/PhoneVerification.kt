@@ -1,25 +1,15 @@
 package com.example.doctorapp.VIEW
 
-import android.annotation.SuppressLint
-import android.app.Activity
+
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import android.provider.CalendarContract.Colors
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.example.doctorapp.MODEL.PhoneModel
 import com.example.doctorapp.R
@@ -28,24 +18,8 @@ import com.example.doctorapp.UTIL.mToast
 import com.example.doctorapp.VIEW_MODEL.DocViewModel
 import com.example.doctorapp.databinding.ActivityPhoneVerificationBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthMissingActivityForRecaptchaException
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
-import io.github.jan.supabase.auth.Auth
-import io.github.jan.supabase.auth.OtpType
-import io.github.jan.supabase.auth.auth
-import io.github.jan.supabase.auth.providers.builtin.OTP
-import io.github.jan.supabase.createSupabaseClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.concurrent.TimeUnit
 import kotlin.getValue
 
 class PhoneVerification : AppCompatActivity() {
@@ -70,7 +44,7 @@ class PhoneVerification : AppCompatActivity() {
                     try {
                         val viewmodel by viewModels<DocViewModel>()
                         val resultOtp = viewmodel.getOtp(PhoneModel(phoneVerificationBinding.ccp.fullNumberWithPlus))
-                        otp = resultOtp.body()!!.otp.toString()
+                        otp = resultOtp.body()!!.otp
                         Log.d("@otp",otp)
                         if (resultOtp.isSuccessful){
                             phoneVerificationBinding.otp.visibility = View.VISIBLE

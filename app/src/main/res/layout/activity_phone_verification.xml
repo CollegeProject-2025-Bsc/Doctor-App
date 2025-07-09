@@ -151,7 +151,7 @@
             android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:text="Enter the code send to +919836046710"
-            android:textColor="#191919"
+            android:textColor="@color/ui_gray"
             android:textSize="17.dp"
             android:layout_marginBottom="35.dp"
             />

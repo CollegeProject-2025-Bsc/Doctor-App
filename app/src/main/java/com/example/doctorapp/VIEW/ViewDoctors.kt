@@ -49,7 +49,9 @@ class ViewDoctors : AppCompatActivity() {
                 viewDoctorsBinding.loading.visibility = View.GONE
                 viewDoctorsBinding.mainScreen.visibility = View.VISIBLE
                 viewDoctorsBinding.vRecycler.layoutManager = LinearLayoutManager(this@ViewDoctors)
-                viewDoctorsBinding.vRecycler.adapter = DocViewCardAdapter(result.body()!!)
+                viewDoctorsBinding.vRecycler.adapter = DocViewCardAdapter(result.body()!!){
+
+                }
                 Log.d("@viewDoctor", result.body().toString())
             }else{
                 viewDoctorsBinding.ivLottie.setAnimationFromUrl(ERROR)

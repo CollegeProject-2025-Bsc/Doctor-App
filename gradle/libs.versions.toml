@@ -17,6 +17,8 @@ googleid = "1.1.1"
 playServicesAuth = "21.3.0"
 firebaseFirestore = "25.1.3"
 cardview = "1.0.0"
+lifecycleViewmodelAndroid = "2.9.1"
+places = "4.3.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,6 +36,8 @@ googleid = { group = "com.google.android.libraries.identity.googleid", name = "g
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
+androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleViewmodelAndroid" }
+places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

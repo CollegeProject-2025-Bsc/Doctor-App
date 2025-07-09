@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import com.example.doctorapp.MODEL.DoctorModel
 import com.example.doctorapp.R
 import com.example.doctorapp.VIEW.DoctorProfile
 
-class DocViewCardAdapter(val doctor: List<DoctorModel>): RecyclerView.Adapter<DocViewCardAdapter.ViewHolder>() {
+class DocViewCardAdapter(var doctor: List<DoctorModel>, val delete:(Int)-> Unit): RecyclerView.Adapter<DocViewCardAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
@@ -57,11 +58,34 @@ class DocViewCardAdapter(val doctor: List<DoctorModel>): RecyclerView.Adapter<Do
             context.startActivity(Intent(context,DoctorProfile::class.java).putExtra("doctor",doctor[position]))
         }
 
+        holder.itemView.setOnLongClickListener { view ->
+            val popupMenu = PopupMenu(view.context, view)
+            popupMenu.menu.add("Delete")  // You can add more options if needed
+
+            popupMenu.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.title) {
+                    "Delete" -> {
+                         delete(position)   // Handle delete action
+                         // Or whatever your method is
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+            popupMenu.show()
+            true
+        }
+
 
         Glide.with(context).load(doctor[position].profile_pic).error(R.drawable.doctor_avatar).into(docImg)
     }
 
     override fun getItemCount(): Int = doctor.size
 
+    fun update(fav: List<DoctorModel>){
+        doctor = fav
+        notifyDataSetChanged()
+    }
 
 }

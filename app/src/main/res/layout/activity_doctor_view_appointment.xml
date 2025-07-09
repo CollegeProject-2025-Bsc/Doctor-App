@@ -90,6 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_gravity="bottom"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/dname"
@@ -269,6 +270,7 @@
                     android:textSize="15dp"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/favAdd"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"

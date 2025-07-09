@@ -41,6 +41,7 @@ android {
 
 dependencies {
 
+    //some core library for android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -52,6 +53,8 @@ dependencies {
     implementation(libs.play.services.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.androidx.cardview)
+    implementation(libs.androidx.lifecycle.viewmodel.android)
+    implementation(libs.places)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -59,37 +62,41 @@ dependencies {
     //country code picker library
     implementation ("com.hbb20:ccp:2.7.3")
 
-    //pin view
+    //pin view for otp design
     implementation ("io.github.chaosleung:pinview:1.4.4")
 
-    // Import the BoM for the Firebase platform
+    //library for accessing firebase
     implementation(platform("com.google.firebase:firebase-bom:33.11.0"))
-
-    // Add the dependency for the Firebase Authentication library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
 
-    implementation(platform("io.github.jan-tennert.supabase:bom:3.1.2"))
-    implementation("io.github.jan-tennert.supabase:auth-kt")
+    //location accessing library
+    implementation ("com.google.android.gms:play-services-location:21.3.0")
+
+    //another api calling network library
     implementation("io.ktor:ktor-client-android:3.1.1")
 
 
+    //retrofit for api calling socket
     implementation ("com.google.code.gson:gson:2.9.1")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.facebook.android:facebook-android-sdk:latest.release")
 
 
+    //kotlin core library for viewmodel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+
+    //Image creating library
     implementation("io.coil-kt:coil:2.5.0")
     implementation("io.coil-kt:coil-svg:2.5.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
 
+    //lottie animation library
     implementation ("com.airbnb.android:lottie:3.4.0")
 
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-    implementation ("com.google.android.gms:play-services-location:21.3.0")
 
+
+    //razorpay library to add online payment feature
     implementation ("com.razorpay:checkout:1.6.33")
-
 }

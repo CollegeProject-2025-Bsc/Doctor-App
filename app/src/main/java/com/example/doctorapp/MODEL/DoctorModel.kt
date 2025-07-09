@@ -18,7 +18,8 @@ data class DoctorModel(
     val rating: Double,
     val schedule: Map<String, List<TimeSlot>>,
     val slot: Int,
-    val specialization: String
+    val specialization: String,
+    val dep_id:String
 ): Serializable
 
 data class TimeSlot (

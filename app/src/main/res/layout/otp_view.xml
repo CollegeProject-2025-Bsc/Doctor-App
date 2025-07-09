@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="OTP Verification"
+            android:gravity="center"
+            android:textColor="@color/text_color"
+            android:textSize="25.dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="Enter the code send to +919836046710"
+            android:textColor="@color/ui_gray"
+            android:textSize="17.dp"
+            android:layout_marginBottom="35.dp"
+            />
+        <com.chaos.view.PinView
+            android:id="@+id/pinview"
+            app:itemCount="6"
+            app:itemWidth="30dp"
+            app:itemHeight="30dp"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:itemBackground="@android:color/transparent"
+            android:layout_gravity="center"
+            android:inputType="number"
+            android:cursorVisible="true"
+            app:cursorColor="@color/ui_blue"
+            app:hideLineWhenFilled="false"
+            app:itemRadius="10dp"
+            android:textColor="@color/text_color"
+            app:lineColor="@color/ui_blue"
+            style="@style/PinWidget.PinView"
+            />
+        <Button
+            android:id="@+id/optSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit OTP"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:backgroundTint="@color/btn_blue"
+            />
+        <ProgressBar
+            android:id="@+id/progressO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="30dp"
+            android:indeterminateTint="@color/ui_blue"/>
+    </LinearLayout>
+</LinearLayout>

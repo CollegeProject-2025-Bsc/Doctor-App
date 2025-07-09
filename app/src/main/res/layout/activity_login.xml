@@ -41,7 +41,6 @@
         android:textStyle="bold"
         android:layout_marginBottom="30dp"
         />
-
     <EditText
         android:id="@+id/email"
         android:hint="Email"
@@ -98,9 +97,7 @@
             android:textColor="@color/ui_blue"
             android:textStyle="bold"/>
     </LinearLayout>
-
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="vertical"
@@ -111,8 +108,7 @@
         <LinearLayout
             android:id="@+id/login"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
             <TextView
                 android:id="@+id/loginText"
                 android:layout_width="match_parent"
@@ -122,7 +118,6 @@
                 android:textColor="@color/white"
                 android:textSize="20dp" />
         </LinearLayout>
-
         <ProgressBar
             android:id="@+id/progress"
             android:visibility="gone"
@@ -130,8 +125,6 @@
             android:layout_height="wrap_content"
             android:indeterminateTint="@color/white"/>
     </LinearLayout>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -139,21 +132,17 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:gravity="bottom|center_horizontal"
-        android:orientation="vertical"
-        >
-
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:orientation="horizontal">
-
             <View
                 android:layout_width="100dp"
                 android:layout_height="2dp"
                 android:background="@color/ui_gray" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -163,16 +152,11 @@
                 android:text="Or sign in with"
                 android:textColor="@color/ui_gray"
                 android:textSize="17dp" />
-
             <View
                 android:layout_width="100dp"
                 android:layout_height="2dp"
                 android:background="@color/ui_gray" />
         </LinearLayout>
-
-
-
-
         </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -233,6 +217,5 @@
             android:textColor="@color/ui_blue"
             android:textStyle="bold"/>
     </LinearLayout>
-
     </LinearLayout>
 

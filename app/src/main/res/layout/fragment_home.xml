@@ -27,7 +27,7 @@
                     android:layout_height="50dp"
                     app:cardCornerRadius="25dp">
                     <ImageView
-                        android:id="@+id/profilePic"
+                        android:id="@+id/uPic"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/male_avatar"
@@ -112,6 +112,7 @@
                         android:textColor="@color/text_color"
                         />
                     <TextView
+                        android:id="@+id/dSeeAll"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -143,16 +144,6 @@
                         android:textSize="20dp"
                         android:textStyle="bold"
                         android:textColor="@color/text_color"
-                        />
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="See all"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:gravity="end"
-                        android:textColor="@color/ui_blue"
                         />
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView

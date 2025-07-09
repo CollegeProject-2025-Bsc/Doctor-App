@@ -11,7 +11,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.doctorapp.MODEL.AppointmentModel
 import com.example.doctorapp.MODEL.BannerModel
 import com.example.doctorapp.MODEL.DepartmentModel
 import com.example.doctorapp.MODEL.DoctorModel
@@ -20,6 +22,7 @@ import com.example.doctorapp.UTIL.Static.Companion.ERROR
 import com.example.doctorapp.UTIL.Static.Companion.HOMELOADING
 import com.example.doctorapp.UTIL.Static.Companion.LOSTCONN
 import com.example.doctorapp.UTIL.Static.Companion.TAB_ANI_DURATION
+import com.example.doctorapp.UTIL.Static.Companion.USER
 import com.example.doctorapp.VIEW_MODEL.DocViewModel
 import com.example.doctorapp.databinding.ActivityHomeBinding
 import com.google.android.material.snackbar.Snackbar
@@ -28,20 +31,27 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.internal.http2.Http2Reader
 import java.io.Serializable
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 
 class Home : AppCompatActivity() {
     private lateinit var homeBinding: ActivityHomeBinding
+    lateinit var viewmodel: DocViewModel
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         homeBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(homeBinding.root)
-        val viewmodel by viewModels<DocViewModel>()
+        viewmodel = ViewModelProvider(this)[DocViewModel::class.java]
         var tabIndex = 0
         var department: List<DepartmentModel>? = emptyList<DepartmentModel>()
         var popularDoctor: List<DoctorModel>? = emptyList<DoctorModel>()
         var banners: List<BannerModel>? = emptyList<BannerModel>()
-
 
 
 
@@ -55,10 +65,12 @@ class Home : AppCompatActivity() {
                         val departmentResult = viewmodel.getCategory()
                         val popularDoctorResult = viewmodel.getPopularDoctors()
                         val bannerResult = viewmodel.getBanner()
+
                         if (departmentResult.isSuccessful && popularDoctorResult.isSuccessful && bannerResult.isSuccessful){
                             department = departmentResult.body()
                             popularDoctor = popularDoctorResult.body()
                             banners = bannerResult.body()
+
                             Log.d("@pop", "onCreate: $popularDoctor")
                             Log.d("@pop", "onCreate: ${popularDoctorResult.body()}")
                             swapFrame(
@@ -133,7 +145,11 @@ class Home : AppCompatActivity() {
         }
         homeBinding.fav.setOnClickListener {
             if (tabIndex != 1){
-                swapFrame(FavDocFragment())
+                swapFrame(FavDocFragment().also {
+                    it.arguments = Bundle().apply {
+                        putSerializable("viewmodel",viewmodel)
+                    }
+                })
                 tabIndex = 1
             }
             val transition = ScaleAnimation(0f,1f,0f,1f,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f)
@@ -161,7 +177,13 @@ class Home : AppCompatActivity() {
         }
         homeBinding.appoinment.setOnClickListener {
             if (tabIndex != 2){
-                swapFrame(AppointmentFragment())
+                swapFrame(
+                    AppointmentFragment().also {
+                        it.arguments = Bundle().apply {
+                            putSerializable("viewmodel",viewmodel)
+                        }
+                    }
+                )
                 tabIndex = 2
             }
             val transition = ScaleAnimation(0f,1f,0f,1f,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f)
@@ -227,4 +249,5 @@ class Home : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frame,frame)
         fragmentTransaction.commit()
     }
+
 }

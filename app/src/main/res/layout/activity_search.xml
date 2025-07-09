@@ -21,18 +21,61 @@
         android:layout_marginBottom="10dp"
         android:textColor="@color/text_color"
         android:drawableStart="@drawable/baseline_search_24"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Departments"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/text_color"
-        />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDep"
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/helper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:itemCount="10" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Departments"
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/text_color"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerDep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="10" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frequent Searches"
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/text_color"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rKey"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/searchResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Total doctor found 8"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/text_color"
+            android:textSize="17dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
+
 </LinearLayout>
