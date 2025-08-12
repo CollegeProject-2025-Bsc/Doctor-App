@@ -13,6 +13,7 @@ class Privacy : AppCompatActivity() {
     lateinit var binding: ActivityPrivacyBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityPrivacyBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
 
